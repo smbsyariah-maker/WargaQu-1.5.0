@@ -21,8 +21,10 @@ import {
   History,
   UserCheck,
   SlidersHorizontal,
-  Info
+  Info,
+  Download
 } from 'lucide-react';
+import { PWAInstallBanner } from '../pwa/PWAInstallBanner';
 
 interface WargaDashboardProps {
   onOpenRtQu: () => void;
@@ -110,6 +112,9 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
 
       {/* SCROLLABLE MAIN CONTENT AREA */}
       <div className="flex-1 overflow-y-auto no-scrollbar px-4 -mt-12 pb-24 space-y-3.5">
+        {/* PWA Direct Mobile Install Banner */}
+        <PWAInstallBanner showToast={showToast} />
+
         {/* MAIN CARD WIDGET: TOTAL IURAN */}
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-emerald-100/90 relative overflow-hidden">
           {/* Top ID Badge Row */}
