@@ -28,6 +28,9 @@ interface WargaDashboardProps {
   onOpenRtQu: () => void;
   onOpenSiagaQu: () => void;
   onOpenUsahaQu: () => void;
+  onOpenChatQu: () => void;
+  onOpenMuamalahQu: () => void;
+  onOpenAreaQu: () => void;
   onOpenEmptyModule: (moduleId: string) => void;
   activeOrderCount?: number;
 }
@@ -36,6 +39,9 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
   onOpenRtQu,
   onOpenSiagaQu,
   onOpenUsahaQu,
+  onOpenChatQu,
+  onOpenMuamalahQu,
+  onOpenAreaQu,
   onOpenEmptyModule,
   activeOrderCount = 0,
 }) => {
@@ -246,7 +252,7 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
 
             {/* 4. AreaQu */}
             <button
-              onClick={() => onOpenEmptyModule('areaqu')}
+              onClick={onOpenAreaQu}
               className="flex flex-col items-center group active:scale-95 transition"
             >
               <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-100 flex items-center justify-center text-teal-700 group-hover:scale-105 transition shadow-xs">
@@ -259,7 +265,7 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
 
             {/* 5. MuamalahQu */}
             <button
-              onClick={() => onOpenEmptyModule('muamalahqu')}
+              onClick={onOpenMuamalahQu}
               className="flex flex-col items-center group active:scale-95 transition"
             >
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-700 group-hover:scale-105 transition shadow-xs">
@@ -272,7 +278,7 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
 
             {/* 6. ChatQu */}
             <button
-              onClick={() => onOpenEmptyModule('chatqu')}
+              onClick={onOpenChatQu}
               className="flex flex-col items-center group relative active:scale-95 transition"
             >
               <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-700 group-hover:scale-105 transition shadow-xs">

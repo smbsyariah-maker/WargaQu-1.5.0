@@ -5,6 +5,9 @@ import { EmptyModuleView } from './components/warga/EmptyModuleView';
 import { UsahaQuView } from './components/usahaqu/UsahaQuView';
 import { RtQuView } from './components/rtqu/RtQuView';
 import { SiagaQuView } from './components/siagaqu/SiagaQuView';
+import { ChatQuView } from './components/chatqu/ChatQuView';
+import { MuamalahQuView } from './components/muamalahqu/MuamalahQuView';
+import { AreaQuView } from './components/areaqu/AreaQuView';
 
 import {
   TableItem,
@@ -16,7 +19,7 @@ import {
 } from './types';
 import { StorageService } from './services/storage';
 
-type AppScreen = 'warga' | 'rtqu' | 'siagaqu' | 'usahaqu' | 'empty_module';
+type AppScreen = 'warga' | 'rtqu' | 'siagaqu' | 'chatqu' | 'muamalahqu' | 'areaqu' | 'usahaqu' | 'empty_module';
 
 export default function App() {
   // Screen Navigation State
@@ -66,7 +69,31 @@ export default function App() {
     showNotification('Membuka UsahaQu: POS Kasir & Restoran Bakso Qu');
   };
 
+  const handleOpenChatQu = () => {
+    setCurrentScreen('chatqu');
+  };
+
+  const handleOpenMuamalahQu = () => {
+    setCurrentScreen('muamalahqu');
+  };
+
+  const handleOpenAreaQu = () => {
+    setCurrentScreen('areaqu');
+  };
+
   const handleOpenEmptyModule = (moduleId: string) => {
+    if (moduleId === 'chatqu') {
+      setCurrentScreen('chatqu');
+      return;
+    }
+    if (moduleId === 'muamalahqu') {
+      setCurrentScreen('muamalahqu');
+      return;
+    }
+    if (moduleId === 'areaqu') {
+      setCurrentScreen('areaqu');
+      return;
+    }
     setSelectedEmptyModule(moduleId);
     setCurrentScreen('empty_module');
   };
@@ -92,6 +119,9 @@ export default function App() {
           onOpenRtQu={handleOpenRtQu}
           onOpenSiagaQu={handleOpenSiagaQu}
           onOpenUsahaQu={handleOpenUsahaQu}
+          onOpenChatQu={handleOpenChatQu}
+          onOpenMuamalahQu={handleOpenMuamalahQu}
+          onOpenAreaQu={handleOpenAreaQu}
           onOpenEmptyModule={handleOpenEmptyModule}
           activeOrderCount={activeOrderCount}
         />
@@ -111,11 +141,42 @@ export default function App() {
         <SiagaQuView
           onBackToMain={handleBackToWarga}
           showNotification={showNotification}
-          onOpenChatQu={() => handleOpenEmptyModule('chatqu')}
+          onOpenChatQu={handleOpenChatQu}
         />
       )}
 
-      {/* Screen 4: UsahaQu (Bakso Qu 1.0 POS Kasir & Restoran) */}
+      {/* Screen 4: Modul ChatQu (WhatsApp-style citizen coordination) */}
+      {currentScreen === 'chatqu' && (
+        <ChatQuView
+          onBackToMain={handleBackToWarga}
+          showNotification={showNotification}
+        />
+      )}
+
+      {/* Screen 5: Modul MuamalahQu (Marketplace Warga Shopee-style) */}
+      {currentScreen === 'muamalahqu' && (
+        <MuamalahQuView
+          onBackToMain={handleBackToWarga}
+          menuList={menuList}
+          setMenuList={setMenuList}
+          showNotification={showNotification}
+          onOpenChatQu={handleOpenChatQu}
+        />
+      )}
+
+      {/* Screen 6: Modul AreaQu (Peta OSM & Radar Kawasan Grab Driver-style) */}
+      {currentScreen === 'areaqu' && (
+        <AreaQuView
+          onBackToMain={handleBackToWarga}
+          onOpenSiagaQu={handleOpenSiagaQu}
+          onOpenChatQu={handleOpenChatQu}
+          onOpenUsahaQu={handleOpenUsahaQu}
+          menuList={menuList}
+          showNotification={showNotification}
+        />
+      )}
+
+      {/* Screen 7: UsahaQu (Bakso Qu 1.0 POS Kasir & Restoran) */}
       {currentScreen === 'usahaqu' && (
         <UsahaQuView
           onBackToWarga={handleBackToWarga}
