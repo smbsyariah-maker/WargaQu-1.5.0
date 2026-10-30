@@ -26,6 +26,7 @@ import {
 
 interface WargaDashboardProps {
   onOpenRtQu: () => void;
+  onOpenSiagaQu: () => void;
   onOpenUsahaQu: () => void;
   onOpenEmptyModule: (moduleId: string) => void;
   activeOrderCount?: number;
@@ -33,6 +34,7 @@ interface WargaDashboardProps {
 
 export const WargaDashboard: React.FC<WargaDashboardProps> = ({
   onOpenRtQu,
+  onOpenSiagaQu,
   onOpenUsahaQu,
   onOpenEmptyModule,
   activeOrderCount = 0,
@@ -199,10 +201,11 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
               </span>
             </button>
 
-            {/* 2. SiagaQu */}
+            {/* 2. SiagaQu (Panic Button) */}
             <button
-              onClick={() => onOpenEmptyModule('siagaqu')}
+              onClick={onOpenSiagaQu}
               className="flex flex-col items-center group relative active:scale-95 transition"
+              title="Buka Modul SiagaQu (Panic Button)"
             >
               <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 group-hover:scale-105 transition shadow-xs">
                 <Siren className="w-6 h-6" />
