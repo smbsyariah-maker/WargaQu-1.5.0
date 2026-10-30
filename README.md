@@ -1,6 +1,26 @@
-# Bakso Qu 1.0 - POS Kasir & Restoran Android
+# WargaQu Mobile App (dengan UsahaQu POS Kasir Bakso Qu)
 
-Aplikasi Point of Sales (POS) dan manajemen restoran modern berbasis Android, dirancang khusus untuk layar smartphone portrait.
+Aplikasi superapp warga modern dengan modul POS Kasir & Manajemen Restoran UsahaQu (Bakso Qu 1.0).
+
+---
+
+## 🌐 Cara Deploy ke GitHub Pages (Otomatis)
+
+Proyek ini telah dikonfigurasi penuh agar dapat di-deploy secara otomatis ke **GitHub Pages** menggunakan GitHub Actions (`.github/workflows/deploy-pages.yml`) dan base path relatif (`base: './'`).
+
+### Langkah Mengaktifkan di Repositori GitHub:
+1. Buka repositori proyek Anda di **GitHub**.
+2. Masuk ke menu **Settings** > pilih **Pages** (di sidebar kiri).
+3. Pada bagian **Build and deployment**:
+   - Di dropdown **Source**, pilih **GitHub Actions**.
+4. Selesai! Sekarang setiap kali Anda melakukan `git push` ke branch `main` atau `master`:
+   - GitHub Actions akan otomatis men-compile aplikasi web Vite.
+   - Hasil build akan langsung dipublikasikan ke URL: `https://<username>.github.io/<nama-repo>/`.
+
+### Menjalankan Deploy Manual:
+1. Buka tab **Actions** di repositori GitHub Anda.
+2. Pilih workflow **"Deploy to GitHub Pages"**.
+3. Klik tombol **Run workflow** di sebelah kanan atas.
 
 ---
 
