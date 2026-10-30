@@ -3,6 +3,7 @@ import { AndroidFrame } from './components/AndroidFrame';
 import { WargaDashboard } from './components/warga/WargaDashboard';
 import { EmptyModuleView } from './components/warga/EmptyModuleView';
 import { UsahaQuView } from './components/usahaqu/UsahaQuView';
+import { RtQuView } from './components/rtqu/RtQuView';
 
 import {
   TableItem,
@@ -14,12 +15,12 @@ import {
 } from './types';
 import { StorageService } from './services/storage';
 
-type AppScreen = 'warga' | 'usahaqu' | 'empty_module';
+type AppScreen = 'warga' | 'rtqu' | 'usahaqu' | 'empty_module';
 
 export default function App() {
   // Screen Navigation State
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('warga');
-  const [selectedEmptyModule, setSelectedEmptyModule] = useState<string>('rtqu');
+  const [selectedEmptyModule, setSelectedEmptyModule] = useState<string>('siagaqu');
 
   // Core POS Data States (Persisted for UsahaQu / Bakso Qu)
   const [tables, setTables] = useState<TableItem[]>([]);
@@ -51,6 +52,10 @@ export default function App() {
     }, 3000);
   };
 
+  const handleOpenRtQu = () => {
+    setCurrentScreen('rtqu');
+  };
+
   const handleOpenUsahaQu = () => {
     setCurrentScreen('usahaqu');
     showNotification('Membuka UsahaQu: POS Kasir & Restoran Bakso Qu');
@@ -76,16 +81,26 @@ export default function App() {
         </div>
       )}
 
-      {/* Screen 1: WargaQu Mobile App Dashboard (Design matches user provided code) */}
+      {/* Screen 1: WargaQu Mobile App Dashboard */}
       {currentScreen === 'warga' && (
         <WargaDashboard
+          onOpenRtQu={handleOpenRtQu}
           onOpenUsahaQu={handleOpenUsahaQu}
           onOpenEmptyModule={handleOpenEmptyModule}
           activeOrderCount={activeOrderCount}
         />
       )}
 
-      {/* Screen 2: UsahaQu (Bakso Qu 1.0 POS Kasir & Restoran) */}
+      {/* Screen 2: Modul RtQu (Pengurusan RT 03 / RW 05) */}
+      {currentScreen === 'rtqu' && (
+        <RtQuView
+          onBackToMain={handleBackToWarga}
+          onOpenUsahaQu={handleOpenUsahaQu}
+          showNotification={showNotification}
+        />
+      )}
+
+      {/* Screen 3: UsahaQu (Bakso Qu 1.0 POS Kasir & Restoran) */}
       {currentScreen === 'usahaqu' && (
         <UsahaQuView
           onBackToWarga={handleBackToWarga}
@@ -107,7 +122,7 @@ export default function App() {
         />
       )}
 
-      {/* Screen 3: Empty Modules (RtQu, SiagaQu, AreaQu, MuamalahQu, ChatQu, Setting, etc.) */}
+      {/* Screen 4: Empty Modules (SiagaQu, AreaQu, MuamalahQu, ChatQu, Setting, etc.) */}
       {currentScreen === 'empty_module' && (
         <EmptyModuleView
           moduleId={selectedEmptyModule}

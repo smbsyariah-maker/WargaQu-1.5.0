@@ -25,12 +25,14 @@ import {
 } from 'lucide-react';
 
 interface WargaDashboardProps {
+  onOpenRtQu: () => void;
   onOpenUsahaQu: () => void;
   onOpenEmptyModule: (moduleId: string) => void;
   activeOrderCount?: number;
 }
 
 export const WargaDashboard: React.FC<WargaDashboardProps> = ({
+  onOpenRtQu,
   onOpenUsahaQu,
   onOpenEmptyModule,
   activeOrderCount = 0,
@@ -185,8 +187,9 @@ export const WargaDashboard: React.FC<WargaDashboardProps> = ({
           <div className="grid grid-cols-4 gap-y-4 gap-x-2">
             {/* 1. RtQu */}
             <button
-              onClick={() => onOpenEmptyModule('rtqu')}
+              onClick={onOpenRtQu}
               className="flex flex-col items-center group active:scale-95 transition"
+              title="Buka Modul RtQu"
             >
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-700 group-hover:scale-105 transition shadow-xs">
                 <Home className="w-6 h-6" />
